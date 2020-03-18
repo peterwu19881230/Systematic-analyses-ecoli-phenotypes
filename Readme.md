@@ -15,5 +15,6 @@
     + Change the designated directories for the .R files based on the downloaded path of the local folder, if needed.
     + All data (files with .RData, excel, .txt...etc., extensions ) required to run the scripts as well as intermediate data files are all provided in the Data  folder
     + Self-defined functions are in the functions folder
+    + .gitignore and .gitattributes are configuration files for git, which should be ignored from user' end
     
   
