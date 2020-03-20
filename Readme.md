@@ -11,7 +11,7 @@
     6. In the pairwise_obj file, run the following files in sequence to obtain pairwise co-annotation information and various similarity metrics: generate_strain1_strain2_GO_separated.R, generate_strain1strain2_allAnnotations.R, generate_strain1strain2_allDistances.R, generate_strain1strain2_allAnnotations_allDistances.R.
 
 * Notes:
-    + Results are summarized in the Jupyter Notebook: paper_figs.ipynb    
+    + Results are summarized in the R Jupyter Notebook: paper_figs.ipynb    
     + Change the designated directories for the .R files based on the downloaded path of the local folder, if needed.
     + All data (files with .RData, excel, .txt...etc., extensions ) required to run the scripts as well as intermediate data files are all provided in the Data  folder
     + Self-defined functions are in the functions folder
