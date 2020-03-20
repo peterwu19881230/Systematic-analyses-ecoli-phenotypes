@@ -14,7 +14,7 @@ if(!require(pacman)){
 #Tidyverse: https://www.tidyverse.org/packages/
 #Note: BiocManager has to be installed before its downstream packages
 pacman::p_load(tidyverse,pbapply,BiocManager,readxl,factoextra,pheatmap,ComplexHeatmap,XML,reshape2,googlesheets,googledrive,
-               circlize,ape,dendextend,sqldf,RMySQL,AnnotationHub,infotheo,stringi,purrr,ggfortify,cowplot) #Note ggplot2 is loaded when tidyverse or factoextra is loaded 
+               circlize,ape,dendextend,sqldf,RMySQL,AnnotationHub,infotheo,stringi,purrr,ggfortify,cowplot,gridGraphics,gridExtra,grid) #Note ggplot2 is loaded when tidyverse or factoextra is loaded 
 
 #Uncomment the following if scripts using the following library need to be rerun
 
