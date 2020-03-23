@@ -77,6 +77,21 @@ meltANDsort_dist=function(distance,decreasing=F){
 }
 
 
+## Compute the attribute list by inputting relational data
+##name is the name vecotr, attribute is the vector of corresponding attributes
+attr_list=function(name,attribute){
+  uniqueName=unique(name)
+  
+  attribute_list=list()
+  for(i in 1:length(uniqueName)){
+    attribute_list[[i]]=attribute[name==uniqueName[i]]
+  }
+  
+  names(attribute_list)=uniqueName
+  
+  return(attribute_list)
+}
+
 #function to obtain confusion matrix and some metrics
 #========================================================================================================================
 confusionMatrix_metrics=function(cumSums,rankings=seq_along(cumSums),total=length(cumSums),seed=102){ #cumSums would be a numeric vector

@@ -1,5 +1,5 @@
 #Random expectation
-random_expectation=mean(1-strain1strain2_allAnnotations_allDistances$pcc)
+random_expectation=mean(1-strain1strain2_allAnnotations_allDistances$pcc) #avg |PCC| of all pairs
 
 #Function to generate df for the boxplot
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -165,6 +165,14 @@ p_Pcomplex=ggplot(tab[tab$no_gene_used %in% c(4, 5, 6,  7,  9, 10, 11, 12, 27),]
 
 
 #=========================================================================================================
+
+
+#% of pwy/pcomplex that have average pcc than random expectation
+sum(abs_cors_for_pwys$avg_pcc>random_expectation)/length(abs_cors_for_pwys$avg_pcc) # 72%
+sum(abs_cors_for_pcomplexes$avg_pcc>random_expectation)/length(abs_cors_for_pcomplexes$avg_pcc) # 67%
+
+
+
 
 #Save the graph in pdf
 
