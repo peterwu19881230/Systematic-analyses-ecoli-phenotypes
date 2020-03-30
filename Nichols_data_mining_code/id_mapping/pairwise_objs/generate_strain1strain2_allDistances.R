@@ -56,8 +56,6 @@ load("Data/mi_ternary.RData")
 #save(mi_ternary_collapsedCond,file="Data/mi_ternary_collapsedCond.RData")
 load("Data/mi_ternary_collapsedCond.RData")
 
-##t-SNE
-##Don't know how to do this yet
 
 ##GO similarity (Wang method)
 str(strain1_strain2_WangBP_WangMF_WangCC)
