@@ -80,15 +80,15 @@ identical(strain1_strain2_WangBP_WangMF_WangCC$strain2,pcc[,2])
 
 
 strain1strain2_allDistances=cbind(pcc,
-                                  spearman=spearman$Distance,
-                                  euclidean=euclidean$Distance,
-                                  mi=mi$Distance,
-                                  euclidean_qualitative=euclidean_qualitative$Distance,
-                                  euclidean_collapsedCond=euclidean_collapsedCond$Distance,
-                                  mhd3=mhd3$Distance,
-                                  mhd3_collapsedCond=mhd3_collapsedCond$Distance,
-                                  mi_ternary=mi_ternary$Distance,
-                                  mi_ternary_collapsedCond=mi_ternary_collapsedCond$Distance,
+                                  spearman=spearman[[3]],
+                                  euclidean=euclidean[[3]],
+                                  mi=mi[[3]],
+                                  euclidean_qualitative=euclidean_qualitative[[3]],
+                                  euclidean_collapsedCond=euclidean_collapsedCond[[3]],
+                                  mhd3=mhd3[[3]],
+                                  mhd3_collapsedCond=mhd3_collapsedCond[[3]],
+                                  mi_ternary=mi_ternary[[3]],
+                                  mi_ternary_collapsedCond=mi_ternary_collapsedCond[[3]],
                                   Wang_BP=strain1_strain2_WangBP_WangMF_WangCC$BP,
                                   Wang_MF=strain1_strain2_WangBP_WangMF_WangCC$MF,
                                   Wang_CC=strain1_strain2_WangBP_WangMF_WangCC$CC,
@@ -106,7 +106,7 @@ for(i in 3:dim(strain1strain2_allDistances)[2]){
 rownames(strain1strain2_allDistances)=as.character(1:7914231) #correct the rownames (don't know why it started with 2)
 
 
-#save(strain1strain2_allDistances,file="Data/strain1strain2_allDistances.RData")
+save(strain1strain2_allDistances,file="Data/strain1strain2_allDistances.RData")
 
 
 

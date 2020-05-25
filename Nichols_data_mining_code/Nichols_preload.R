@@ -18,13 +18,13 @@ pacman::p_load(tidyverse,pbapply,BiocManager,readxl,factoextra,pheatmap,ComplexH
 
 #Uncomment the following if scripts using the following library need to be rerun
 
-#if(!require(GOSemSim)){
-#  BiocManager::install("GOSemSim")
-#}
+if(!require(GOSemSim)){
+  BiocManager::install("GOSemSim")
+}
 
-#if(!require(org.EcK12.eg.db)){
-#  BiocManager::install("org.EcK12.eg.db")
-#}
+if(!require(org.EcK12.eg.db)){
+  BiocManager::install("org.EcK12.eg.db")
+}
 
 
 

@@ -7,7 +7,7 @@
 
 id_pwy=id_allAttributes[,c("ids","Pwy")] %>% unique
 id_pwy=id_pwy[!is.na(id_pwy$Pwy),]
-pathway_ids=attr_list(id_pwy$Pwy,id_pwy$ids)
+pathway_ids=attr_list(id_pwy[,c("Pwy","ids")])
 
 samePwy_df=data.frame(id1=NULL,id2=NULL,pcc=NULL)
 for(i in 1:length(pathway_ids)){
@@ -35,13 +35,15 @@ samePwy_df=samePwy_df[!duplicated(samePwy_df),]
 id_pcomplex=id_allAttributes[,c("ids","pcomplex")] %>% unique
 id_pcomplex=id_pcomplex[!is.na(id_pcomplex$pcomplex),]
 
-pcomplex_ids=attr_list(id_pcomplex$pcomplex,id_pcomplex$ids)
 
+pcomplex_ids=attr_list(id_pcomplex[,c("pcomplex","ids")])
 
 #The following gathers all avg from genes in the same protein complex
 samePcomplex_df=data.frame(id1=NULL,id2=NULL,pcc=NULL)
 for(i in 1:length(pcomplex_ids)){
-  if(length(pcomplex_ids[[i]])==1){ #If it's a monomer or if there is only 1 gene in Nichols' that's involved in the protein complex, remove it
+  if(grepl(pattern = "MONOMER",x = names(pcomplex_ids)[i]) | length(pcomplex_ids[[i]])==1){ 
+    ##If there is only 1 gene in Nichols' that's involved in the protein complex, remove it
+    
     print("The following only has 1 gene:")
     print(pcomplex_ids[i])
     next
@@ -125,7 +127,7 @@ get_boxplot_table=function(annotationSet,absolute=F){
   
   id_annotation=id_allAttributes[,c("ids",annotationSet)] %>% unique
   id_annotation=id_annotation[!is.na(id_annotation[[annotationSet]]),]
-  annotation_ids=attr_list(id_annotation[[annotationSet]],id_annotation$ids) 
+  annotation_ids=attr_list(cbind(id_annotation[[annotationSet]],id_annotation$ids)) 
   
   cors_for_annotationSet_all=list()
   cors_for_annotationSet=data.frame()
@@ -201,14 +203,14 @@ rm(temp)
 
 #=========================================================================================================
 
-'
+
 save(cors_for_pwys,cors_for_pwys_all,
      abs_cors_for_pwys,abs_cors_for_pwys_all,
      cors_for_pcomplexes,cors_for_pcomplexes_all,
      abs_cors_for_pcomplexes,abs_cors_for_pcomplexes_all,
      cor_in_pwy,cor_in_pcomplex,
      samePwy_df,samePcomplex_df,samePwyORPcomplex_df,samePwyPcomplex_df,file="Data/cors_for_Pwy_Pcomplex.RData")
-'
+
 
 
 
