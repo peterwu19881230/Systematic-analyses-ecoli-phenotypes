@@ -33,6 +33,16 @@ pre_process_for_ggplot=function(abs_cors_for_annotations,abs_cors_for_annotation
 load("Data/cors_for_Pwy_Pcomplex.RData") #load the required data
 text_size=10 #text size for x labels (pwy/pcomplex names)
 
+  
+random_line=geom_hline(yintercept = random_expectation,colour="red",linetype="dashed",size=0.5)
+
+##~~~~ add this block to make the random line thicker~~~~
+deviation=0.003
+random_line_2=geom_hline(yintercept = random_expectation+deviation,colour="red",linetype="dashed",size=0.5)
+random_line_3=geom_hline(yintercept = random_expectation-deviation,colour="red",linetype="dashed",size=0.5)
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 #Pwy
 
 #no. of genes in pathways= c(3:22,27,28,31,41,47,48)
@@ -56,16 +66,16 @@ p_Pwy_list=list()
 count=1
 for(no_of_gene in list(2,c(3,4),c(5,6),c(7,8,9,10),c(11,12,13,14,15,16,17,18,20,21,22,26,27,28,31,41,48))){
   p_Pwy_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) +  
-    theme_minimal()+
+    theme_classic()+
     #ggtitle("Average |PCC| for gene pairs in EcoCyc Pathways")+
     theme(plot.title= element_text(size = 20, hjust = 0.5),
-          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size),legend.position="none",
+          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size,face="bold"),legend.position="none",
           axis.text.y=element_text(size=10),
           axis.title=element_text(size=20))+
     facet_grid(. ~ no_gene_used, scales="free_x", space="free_x")+
     geom_boxplot()+ylab("")+xlab("")+
     #ylab("|PCC|")+xlab("EcoCyc Pathway Annotations")+
-    geom_hline(yintercept = random_expectation,linetype="longdash",colour="black",size=1,alpha=0.5)+
+    random_line+random_line_2+random_line_3+
     ylim(0,1)
   ##Note: add fill=no_gene_used to aes() to make it colorful
   
@@ -78,16 +88,16 @@ p_Pwy_correction_list=list()
 count=1
 for(no_of_gene in list(2,c(3,4),c(5,6),c(7,8,9,10),c(11,12,13,14,15,16,17,18,20,21,22,26,27,28,31,41,48))){
   p_Pwy_correction_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) +  
-    theme_minimal()+
+    theme_classic()+
     #ggtitle("Average |PCC| for gene pairs in EcoCyc Pathways")+
     theme(plot.title= element_text(size = 20, hjust = 0.5),
-          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size),legend.position="none",
+          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size,face="bold"),legend.position="none",
           axis.text.y=element_text(size=10),
           axis.title=element_text(size=20))+
     facet_grid(. ~ no_gene_used, scales="free_x", space="free_x")+
-    geom_point(color="grey")+ylab("")+xlab("")+
+    geom_point(color="black",alpha=0.5)+ylab("")+xlab("")+
     #ylab("|PCC|")+xlab("EcoCyc Pathway Annotations")+
-    geom_hline(yintercept = random_expectation,linetype="longdash",colour="black",size=1,alpha=0.5)+
+    random_line+random_line_2+random_line_3+
     ylim(0,1)
   ##Note: add colour=no_gene_used to aes and remove color="grey" in geom_point to make it colorful
   
@@ -119,16 +129,16 @@ p_Pcomplex_list=list()
 count=1
 for(no_of_gene in list(2,3,c(4,5,6,7,9,10,12,14,28))){
   p_Pcomplex_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) +  
-    theme_minimal()+
+    theme_classic()+
     #ggtitle("Average |PCC| for gene pairs in EcoCyc Pathways")+
     theme(plot.title= element_text(size = 20, hjust = 0.5),
-          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size),legend.position="none",
+          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size,face="bold"),legend.position="none",
           axis.text.y=element_text(size=10),
           axis.title=element_text(size=20))+
     facet_grid(. ~ no_gene_used, scales="free_x", space="free_x")+
     geom_boxplot()+ylab("")+xlab("")+
     #ylab("|PCC|")+xlab("EcoCyc Pathway Annotations")+
-    geom_hline(yintercept = random_expectation,linetype="longdash",colour="black",size=1,alpha=0.5)+
+    random_line+random_line_2+random_line_3+
     ylim(0,1)
   ##Note: add fill=no_gene_used to aes() to make it colorful
   
@@ -140,17 +150,17 @@ for(no_of_gene in list(2,3,c(4,5,6,7,9,10,12,14,28))){
 p_Pcomplex_correction_list=list()
 count=1
 for(no_of_gene in list(2,3,c(4,5,6,7,9,10,12,14,28))){
-  p_Pcomplex_correction_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) +  
-    theme_minimal()+
+  p_Pcomplex_correction_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) + 
+    theme_classic()+
     #ggtitle("Average |PCC| for gene pairs in EcoCyc Pathways")+
     theme(plot.title= element_text(size = 20, hjust = 0.5),
-          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size),legend.position="none",
+          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size,face="bold"),legend.position="none",
           axis.text.y=element_text(size=10),
           axis.title=element_text(size=20))+
     facet_grid(. ~ no_gene_used, scales="free_x", space="free_x")+
-    geom_point(color="grey")+ylab("")+xlab("")+
+    geom_point(color="black",alpha=0.5)+ylab("")+xlab("")+
     #ylab("|PCC|")+xlab("EcoCyc Pathway Annotations")+
-    geom_hline(yintercept = random_expectation,linetype="longdash",colour="black",size=1,alpha=0.5)+
+    random_line+random_line_2+random_line_3+
     ylim(0,1)
   ##Note: add colour=no_gene_used to aes and remove color="grey" in geom_point to make it colorful
   

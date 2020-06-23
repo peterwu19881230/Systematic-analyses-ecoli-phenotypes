@@ -14,7 +14,7 @@ load("Data/ECK_1st_table.RData")
 
 ##Read the file
 ECgene_association.ecocyc=read.csv("Data/2017_05_ECgene_association.ecocyc.csv",stringsAsFactors=F) 
-##There are newer versions. Probably doesn't differ much
+##There are newer versions. Probably don't differ much
 
 
 

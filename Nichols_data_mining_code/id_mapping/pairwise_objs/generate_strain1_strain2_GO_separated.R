@@ -2,7 +2,6 @@
 
 
 
-
 id_allGO=id_allAttributes[,c("ids","GO")] %>% unique
 id_allGO=id_allGO[!is.na(id_allGO$GO),]
 
@@ -10,6 +9,7 @@ id_BP=id_allGO[AnnotationDbi::Ontology(id_allGO$GO)=="BP" & !is.na(AnnotationDbi
 id_MF=id_allGO[AnnotationDbi::Ontology(id_allGO$GO)=="MF" & !is.na(AnnotationDbi::Ontology(id_allGO$GO)),]
 id_CC=id_allGO[AnnotationDbi::Ontology(id_allGO$GO)=="CC" & !is.na(AnnotationDbi::Ontology(id_allGO$GO)),]
 
+#dim(id_BP)[1] #5833 BP annotations (including IEA annotations)
 
 
 pairwise_GOannotation=function(id_GO){
