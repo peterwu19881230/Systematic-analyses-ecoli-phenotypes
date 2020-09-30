@@ -40,7 +40,7 @@ modules=foreach(bNumber=ids_bNumber$bNumber) %dopar%{
 stopCluster(cl)
 
 end.time=Sys.time()
-end.time-start.time #Time difference of 13.17327 mins
+end.time-start.time #Time difference of 4.449409 mins
 
 #(11/9/2019)why is this shit keep happening? I tried both on my mac and PC. This script used to work.
 #Error in { : 
@@ -55,7 +55,7 @@ save(KEGGmodulesForNichols,file="Data/KEGGmodulesForNichols.RData")
 
 #How many modules are pathways? (Some of them are protein complexes)
 modules=unlist(KEGGmodulesForNichols) %>% unique #total No. = 196 (new no. from 11/10/2019: 90)
-#11/10: got 90?
+
 
 
 

@@ -1,6 +1,7 @@
+setwd('../..')
+source("Nichols_preload.R")
+
 #Pairwise semantic similarity of Nichols strains (by sets of GO annotations (BP, MF, CC are applied separately) )
-
-
 
 id_allGO=id_allAttributes[,c("ids","GO")] %>% unique
 id_allGO=id_allGO[!is.na(id_allGO$GO),]

@@ -48,7 +48,7 @@ names(EG.product.table)[1]="ids"
 ##ref: https://bioconductor.org/packages/release/bioc/vignettes/UniProt.ws/inst/doc/UniProt.ws.pdf
 ##ref: https://bioconductor.org/packages/release/bioc/manuals/UniProt.ws/man/UniProt.ws.pdf
 
-##BiocManager::install("UniProt.ws")
+BiocManager::install("UniProt.ws")
 library(UniProt.ws)
 
 up=UniProt.ws(taxId=83333) #83333 is the taxon id for E. coli K-12

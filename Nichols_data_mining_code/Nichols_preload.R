@@ -5,7 +5,6 @@ options(stringsAsFactors = FALSE)
 
 
 
-
 #Load commonly used packages. If not installed, install.
 if(!require(pacman)){
   install.packages("pacman")

@@ -1,6 +1,6 @@
 #(run this using terminal: Rscript script.R)
 #last time I ran on my 13' mac took 2.680446 mins
-setwd("/Users/peterwu/Dropbox/Nichols_Data_mining/")
+setwd('../..')
 source("Nichols_preload.R")
 
 #Construct strain1strain2_allAnnotations 
