@@ -1,8 +1,9 @@
-setwd("~/Dropbox/OMP\ shared/peter_wu/1st_paper_nichols_reanalysis/github/Systematic-analyses-ecoli-phenotypes/Nichols_data_mining_code")
+#setwd("~/Dropbox/OMP\ shared/peter_wu/1st_paper_nichols_reanalysis/github/Systematic-analyses-ecoli-phenotypes/Nichols_data_mining_code")
+setwd("D:/Dropbox/OMP\ shared/peter_wu/1st_paper_nichols_reanalysis/github/Systematic-analyses-ecoli-phenotypes/Nichols_data_mining_code")
 source("Nichols_preload.R")
 
 #Random expectation
-random_expectation=abs(strain1strain2_allAnnotations_allSimilarities$pcc) #avg |PCC| of all pairs
+random_expectation=mean(abs(strain1strain2_allAnnotations_allSimilarities$pcc)) #avg |PCC| of all pairs
 
 
 #Function to generate df for the boxplot
@@ -35,7 +36,8 @@ pre_process_for_ggplot=function(abs_cors_for_annotations,abs_cors_for_annotation
 
 
 load("Data/cors_for_Pwy_Pcomplex.RData") #load the required data
-text_size=10 #text size for x labels (pwy/pcomplex names)
+text_size=12 #text size for x labels (pwy/pcomplex names)
+vjust=0.5
 
 
 random_line=geom_hline(yintercept = random_expectation,colour="red",linetype="dashed",size=0.5)
@@ -72,6 +74,12 @@ pwy_tab=cbind(no=pwy_name_table$no,pwy_tab)
 
 tab=pwy_tab[,c(1,3,4,5)]
 
+## this part makes the no. on x axis only has odd no. ##
+## ============================== ##
+my_breaks = tab$no
+my_labs = as.integer(my_breaks)
+my_labs[my_labs%%2==0]=''
+## ============================== ##
 
 no_Pwy=pwy_tab[,c("no","Pwy")] %>% unique
 pwy_fdr=fdr_based_p_val_list[[1]][match(as.character(no_Pwy$Pwy),abs_cors_for_pwys$Pwy)]
@@ -110,6 +118,7 @@ for(no_of_gene in list(2,c(3,4),c(5,6),c(7,8,9,10),c(11,12,13,14,15,16,17,18,20,
     } 
     
     
+    
     label_df = data.frame(no = factor(star_list[[i]],levels=as.character(1:366)),
                           no_gene_used=no_no_gene_used$no_gene_used[which(as.numeric(no_no_gene_used$no) %in% star_list[[i]])],
                           abs_pcc = 1) 
@@ -123,7 +132,7 @@ for(no_of_gene in list(2,c(3,4),c(5,6),c(7,8,9,10),c(11,12,13,14,15,16,17,18,20,
   p_Pwy_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) +  
     theme_classic()+
     theme(plot.title= element_text(size = 20, hjust = 0.5),
-          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size,face="bold"),legend.position="none",
+          axis.text.x = element_text(angle = 90, vjust = vjust,size = text_size,face="bold"),legend.position="none",
           axis.text.y=element_text(size=10),
           axis.title=element_text(size=20))+
     facet_grid(. ~ no_gene_used, scales="free_x", space="free_x")+
@@ -132,8 +141,8 @@ for(no_of_gene in list(2,c(3,4),c(5,6),c(7,8,9,10),c(11,12,13,14,15,16,17,18,20,
     annot_list[[2]]+
     annot_list[[3]]+
     random_line+random_line_2+random_line_3+
-    ylim(0,1)
-  
+    ylim(0,1)+
+    scale_x_discrete(breaks=my_breaks, labels=my_labs)
   
   
   count=count+1
@@ -186,7 +195,7 @@ for(no_of_gene in list(2,c(3,4),c(5,6),c(7,8,9,10),c(11,12,13,14,15,16,17,18,20,
   p_Pwy_correction_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) +  
     theme_classic()+
     theme(plot.title= element_text(size = 20, hjust = 0.5),
-          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size,face="bold"),legend.position="none",
+          axis.text.x = element_text(angle = 90, vjust = vjust,size = text_size,face="bold"),legend.position="none",
           axis.text.y=element_text(size=10),
           axis.title=element_text(size=20))+
     facet_grid(. ~ no_gene_used, scales="free_x", space="free_x")+
@@ -195,7 +204,8 @@ for(no_of_gene in list(2,c(3,4),c(5,6),c(7,8,9,10),c(11,12,13,14,15,16,17,18,20,
     annot_list[[2]]+
     annot_list[[3]]+
     random_line+random_line_2+random_line_3+
-    ylim(0,1) 
+    ylim(0,1)+
+    scale_x_discrete(breaks=my_breaks, labels=my_labs)
   
   count=count+1
 }
@@ -216,6 +226,13 @@ pcomplex_tab=cbind(no=pcomplex_name_table$no,pcomplex_tab)
 
 
 tab=pcomplex_tab[,c(1,3,4,5)]
+
+## this part makes the no. on x axis only has odd no. ##
+## ============================== ##
+my_breaks = tab$no
+my_labs = as.integer(my_breaks)
+my_labs[my_labs%%2==0]=''
+## ============================== ##
 
 #abs_cors_for_pcomplexes
 
@@ -267,7 +284,7 @@ for(no_of_gene in list(2,3,c(4,5,6,7,9,10,12,14,28))){
   p_Pcomplex_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) +  
     theme_classic()+
     theme(plot.title= element_text(size = 20, hjust = 0.5),
-          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size,face="bold"),legend.position="none",
+          axis.text.x = element_text(angle = 90, vjust = vjust,size = text_size,face="bold"),legend.position="none",
           axis.text.y=element_text(size=10),
           axis.title=element_text(size=20))+
     facet_grid(. ~ no_gene_used, scales="free_x", space="free_x")+
@@ -276,7 +293,8 @@ for(no_of_gene in list(2,3,c(4,5,6,7,9,10,12,14,28))){
     annot_list[[2]]+
     annot_list[[3]]+
     random_line+random_line_2+random_line_3+
-    ylim(0,1)
+    ylim(0,1)+
+    scale_x_discrete(breaks=my_breaks, labels=my_labs)
   
   count=count+1
 }
@@ -324,7 +342,7 @@ for(no_of_gene in list(2,3,c(4,5,6,7,9,10,12,14,28))){
   p_Pcomplex_correction_list[[count]]=ggplot(tab[tab$no_gene_used %in% no_of_gene,], aes(x=no, y=abs_pcc)) + 
     theme_classic()+
     theme(plot.title= element_text(size = 20, hjust = 0.5),
-          axis.text.x = element_text(angle = 90, hjust = 1,size = text_size,face="bold"),legend.position="none",
+          axis.text.x = element_text(angle = 90, vjust = vjust,size = text_size,face="bold"),legend.position="none",
           axis.text.y=element_text(size=10),
           axis.title=element_text(size=20))+
     facet_grid(. ~ no_gene_used, scales="free_x", space="free_x")+
@@ -333,13 +351,14 @@ for(no_of_gene in list(2,3,c(4,5,6,7,9,10,12,14,28))){
     annot_list[[2]]+
     annot_list[[3]]+
     random_line+random_line_2+random_line_3+
-    ylim(0,1)
+    ylim(0,1)+
+    scale_x_discrete(breaks=my_breaks, labels=my_labs)
   
   count=count+1
 }
 
 
-setwd("new_exps/permutation_based_p_val")
+
 
 
 #save the figures as pdfs
